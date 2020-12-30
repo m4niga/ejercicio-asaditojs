@@ -6,13 +6,13 @@ class Vehiculo {
   }
 
   contieneY() {
-    this.modelo.includes("Y") && console.log(`${this.marca} ${this.modelo} ${formatearPrecio(this.precio)}`)
+    this.modelo.includes("Y") && console.log(`Vehículo que contiene en el modelo la letra 'Y': ${this.marca} ${this.modelo} ${formatearPrecio(this.precio)}`)
   }
 
   printData() {
     this.cilindrada
-      ? console.log(`Marca: ${this.marca} // Modelo: ${this.modelo} // Precio: ${formatearPrecio(this.precio)} // Cilindrada: ${this.cilindrada}`)
-      : console.log(`Marca: ${this.marca} // Modelo: ${this.modelo} // Precio: ${formatearPrecio(this.precio)} // Puertas: ${this.puertas}`);
+      ? console.log(`Marca: ${this.marca} // Modelo: ${this.modelo} // Cilindrada: ${this.cilindrada} // Precio: ${formatearPrecio(this.precio)}`)
+      : console.log(`Marca: ${this.marca} // Modelo: ${this.modelo} // Puertas: ${this.puertas} // Precio: ${formatearPrecio(this.precio)}`);
   }
 }
 class Motocicleta extends Vehiculo {
@@ -29,9 +29,10 @@ class Automovil extends Vehiculo {
 }
 
 function formatearPrecio(precio) {
-  const precioFormateado = new Intl.NumberFormat("en-US", {
+  const precioFormateado = new Intl.NumberFormat("es-ar", {
     style: "currency",
-    currency: "USD"
+    currency: "ARS",
+    minimumFractionDigits: 2
   }).format(precio);
   return precioFormateado;
 }
@@ -58,7 +59,7 @@ function masCaro(data) {
       masCaro = item.marca + " " + item.modelo;
     }
   });
-  console.log("Vehículo mas caro:", masCaro);
+  console.log("Vehículo más caro:", masCaro);
 }
 
 function masBarato(data) {
@@ -69,7 +70,7 @@ function masBarato(data) {
       masBarato = item.marca + " " + item.modelo;
     }
   });
-  console.log("Vehículo mas barato:", masBarato);
+  console.log("Vehículo más barato:", masBarato);
 }
 
 function existeY(data) {
@@ -87,7 +88,7 @@ function ordenar(data) {
     array.push(obj);
     array.sort((a, b) => {return b.precio - a.precio});
   });
-  array.map(item => console.log(item.marca + " " + item.modelo + " " + formatearPrecio(item.precio)));
+  array.map(item => console.log(item.marca + " " + item.modelo));
 }
 
 function resultadoFinal(myData) {
@@ -95,10 +96,9 @@ function resultadoFinal(myData) {
   console.log("============================");
   masCaro(myData);
   masBarato(myData);
-  console.log("Vehículo que contiene en el modelo la letra 'Y':");
   existeY(myData);
   console.log("============================");
-  console.log("Vehiculos ordenados por precio de mayor a menor");
+  console.log("Vehículos ordenados por precio de mayor a menor:");
   ordenar(myData);
 }
 
