@@ -6,9 +6,7 @@ class Vehiculo {
   }
 
   contieneY() {
-    if (this.modelo.includes("Y")) {
-      return console.log(`${this.marca} ${this.modelo} ${this.precio}`);
-    }
+    this.modelo.includes("Y") && console.log(`${this.marca} ${this.modelo} ${formatearPrecio(this.precio)}`)
   }
 
   printData() {
@@ -48,16 +46,13 @@ function loadData() {
   return data;
 }
 
-const data = loadData();
-
 function printAll(data) {
   data.map(item => item.printData());
 }
 
 function masCaro(data) {
-  var masCaro;
-  var caro = 0;
-  data.map((item, index) => {
+  let caro = 0, masCaro;
+  data.map(item => {
     if (item.precio > caro) {
       caro = item.precio;
       masCaro = item.marca + " " + item.modelo;
@@ -67,8 +62,7 @@ function masCaro(data) {
 }
 
 function masBarato(data) {
-  var masBarato;
-  var barato = 0;
+  let barato = 0, masBarato;
   data.map(item => {
     if (barato == 0 || item.precio < barato) {
       barato = item.precio;
@@ -83,7 +77,7 @@ function existeY(data) {
 }
 
 function ordenar(data) {
-  const array = [];
+  let array = [];
   data.map((item) => {
     const obj = {
       marca: item.marca,
@@ -108,4 +102,5 @@ function resultadoFinal(myData) {
   ordenar(myData);
 }
 
+const data = loadData();
 resultadoFinal(data);
